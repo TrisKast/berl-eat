@@ -1,1 +1,1 @@
-web: gunicorn tabata_warriors.wsgi --log-file -
+web: gunicorn berleat.wsgi --log-file -

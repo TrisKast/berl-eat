@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+
+<head>
+  <title>{% block title %} Berl-Eat {% endblock %}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<section style="height:100vh; display:flex; align-items:center; justify-content:center; background-image: url({% static "images/berlinbackground.jpg" %}); background-repeat: no-repeat; background-size: cover; ">
+  <div>
+  <div class="row mt-2 mb-2">
+    <div class="col-lg-3" style="display: table-cell; vertical-align: middle;">
+      <div class="form-group">
+        <label for="time-select">I want to have:</label>
+        <select class="form-control" id="time-select">
+          <option selected>Food</option>
+          <option>Breakfast</option>
+          <option>Brunch</option>
+          <option>Lunch</option>
+          <option>Coffee/Snack</option>
+          <option>Dinner</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="form-group">
+        <label for="district-select">In:</label>
+        <select class="form-control" id="district-select">
+          <option selected>Berlin</option>
+          <option>Friedrichshain</option>
+          <option>Mitte</option>
+          <option>Charlottenburg</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="form-group">
+        <label for="cuisine-select">I have gravings for:</label>
+        <select class="form-control" id="cuisine-select">
+          <option selected>Everything</option>
+          <option>Asian Kitchen</option>
+          <option>Mexican Kitchen</option>
+          <option>German Kitchen</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="form-group">
+        <label for="extra-select">I'd love to have:</label>
+        <select class="form-control" id="extra-select">
+          <option selected></option>
+          <option>Outdoor seating</option>
+          <option>Vegetarian options</option>
+          <option>Vegan options</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2 mb-2">
+    <button type="button" class="btn btn-dark btn-lg btn-block">Tell me where to eat!</button>
+  </div>
+  </div>
+
+
+</section
+
+</body>
+</html>

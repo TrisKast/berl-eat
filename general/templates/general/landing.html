@@ -10,13 +10,24 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+  <!--<link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'css/landing.css' %}" type="text/css">-->
+
+  <link rel="stylesheet" href="/static/css/base.css" type="text/css">
+  <link rel="stylesheet" href="/static/css/landing.css" type="text/css">
+
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
 </head>
 <body>
 
-<section style="height:100vh; display:flex; align-items:center; justify-content:center; background-image: url({% static "images/berlinbackground.jpg" %}); background-repeat: no-repeat; background-size: cover; ">
+<!-- <section style="height:100vh; display:flex; align-items:center; justify-content:center; background-image: url({% static "images/berlinbackground.jpg" %}); background-repeat: no-repeat; background-size: cover; "> -->
+<section class="full-screen-section" id="landing_view" style="background-image: url('{% static "images/berlinbackground.jpg" %}')">
+
   <div>
   <div class="row mt-2 mb-2">
     <div class="col-lg-3" style="display: table-cell; vertical-align: middle;">

@@ -24,9 +24,10 @@ SECRET_KEY = 'mlmdzqlvc(tee#gdl_$)u#809lwvrq_s*wc(p(sjwbhn55d=yv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+#DEBUG = True
 
-#ALLOWED_HOSTS = ['berl-eat.herokuapp.com', '127.0.0.1']
-ALLOWED_HOSTS = ['127.0.0.1', ]
+ALLOWED_HOSTS = ['berl-eat.herokuapp.com', '127.0.0.1']
+#ALLOWED_HOSTS = ['127.0.0.1', ]
 
 
 # Application definition

@@ -1,1 +1,1 @@
-web: gunicorn berleat.wsgi --log-file -
+web: gunicorn berleat.wsgi

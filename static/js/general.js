@@ -96,11 +96,12 @@ var app = new Vue({
       searchRestaurant: function(){
 
         var self = this;
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
         //var url = 'http://127.0.0.1:8000/api/restaurant_list/'
         var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
 
 
-        fetch(url)
+        fetch(proxyurl + url)
         .then((resp) => resp.json())
         .then(function(data){
 

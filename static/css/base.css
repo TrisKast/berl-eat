@@ -1,1 +1,8 @@
-.full-screen-section{height:100vh;display:flex;align-items:center;justify-content:center;}
+.fill {min-height:100%;height:100%;margin-left:0;margin-right:0;padding-left:0;padding-right:0;}
+.flexxing{display:flex;align-items:center;justify-content:center;}
+.embedded_window{border:0;height:100%;}
+#landingSection{background-repeat: no-repeat; background-size: cover;}
+#suggestionJumbo{font-family:'Tangerine',serif;font-size:96px;}
+#dropMailJumbo{font-family:'Tangerine',serif;font-size:62px;}
+@media only screen and (min-width:600px){.full-screen-section{height:100vh;}.quarter-screen-section{height:25vh;}.half-screen-section{height:50vh;}}
+@media only screen and (max-width:600px){.full-screen-section{height:100vh;}.quarter-screen-section{height:100vh;}.half-screen-section{height:100vh;}#bigmap{visibility:hidden;}}

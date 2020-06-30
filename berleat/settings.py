@@ -27,14 +27,14 @@ SECRET_KEY = 'mlmdzqlvc(tee#gdl_$)u#809lwvrq_s*wc(p(sjwbhn55d=yv'
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
-ALLOWED_HOSTS = ['127.0.0.1', ]
-DEBUG = True
+#ALLOWED_HOSTS = ['127.0.0.1', ]
+#DEBUG = True
 
 
 
-#DEBUG = False
-#ALLOWED_HOSTS = ['berl-eat.herokuapp.com', '127.0.0.1']
-#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+DEBUG = False
+ALLOWED_HOSTS = ['berl-eat.herokuapp.com', '127.0.0.1']
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Application definition
@@ -101,10 +101,10 @@ WSGI_APPLICATION = 'berleat.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'berl_eat',
-        'USER': 'TrisKast',
-        'PASSWORD': '!Audiolith123',
-        'HOST': 'berl-eat.cifxcaqwnjik.eu-central-1.rds.amazonaws.com',
+        'NAME': os.environ.get('DJANGO_DB_BERL_EAT_NAME'),
+        'USER': os.environ.get('DJANGO_DB_BERL_EAT_USER'),
+        'PASSWORD': os.environ.get('DJANGO_DB_BERL_EAT_PASSWORD'),
+        'HOST': os.environ.get('DJANGO_DB_BERL_EAT_HOST'),
         'PORT': '5432',
     }
 }

@@ -18,6 +18,9 @@
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+
+
 
   <link rel="stylesheet" type="text/css" href="/static/css/base.css">
   <base href="/">
@@ -31,7 +34,7 @@
   <section class="full-screen-section flexxing" id="landingSection" style="background-image: url('{% static "images/berlinbackground.jpg" %}');">
     <div>
     <div class="row mt-2 mb-2">
-      <div class="col-lg-3" style="display: table-cell; vertical-align: middle;">
+      <div class="col-lg-3">
         <div class="form-group">
           <label for="time-select">I want to have:</label>
           <select class="form-control" id="time-select" v-model="mealTime">
@@ -42,7 +45,7 @@
       </div>
       <div class="col-lg-3">
         <div class="form-group">
-          <label for="district-select">In:</label>
+          <label for="district-select">Somewhere in:</label>
           <select class="form-control" id="district-select" v-model="district">
             <option select>Complete Berlin</option>
             <option v-for="option in district_list" :value="option">[[option]]</option>
@@ -69,7 +72,7 @@
       </div>
     </div>
 
-    <div class="row mt-2 mb-2">
+    <div class="row mt-4 mb-2">
       <button type="button" class="btn btn-dark btn-lg btn-block" id="SearchRestaurantButton" @click="searchRestaurant">Tell me where to eat!</button>
     </div>
     </div>
@@ -78,8 +81,17 @@
 
   <hr v-if="restaurantSuggestion">
   <section id="suggestionSection" class="full-screen-section flexxing">
-  <p v-if="restaurantSuggestion" id="suggestionJumbo" style="text-align:center">
-    [[restaurantSuggestion.name]], <br> [[restaurantSuggestion.district]]</p>
+  <div v-if="restaurantSuggestion" >
+    <p id="suggestionJumbo" style="text-align:center">
+      [[restaurantSuggestion.name]], <br> [[restaurantSuggestion.district]]
+    </p>
+    <div style="padding-top: 15%">
+      <!--<p id="more-info-text" style="text-align:center">
+        More info!
+      </p>-->
+      <button type="submit" @click="toggle_showMoreInfo" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none; margin:auto; padding:auto;"><img src="{% static 'images/downarrow.png' %}" style="height:15%; width: 15%;"></button>
+    </div>
+  </div>
   <div v-else >
     <p id="dropMailJumbo" style="text-align:center">
       We're always looking for new places to spend quality time. If you favorite place is missing please drop us a mail!
@@ -87,9 +99,40 @@
   </div>
   </section>
 
+  <hr v-if="restaurantSuggestionReview && showMoreInfo">
+  <section class="full-screen-section flexxing" id="restaurantLinks1" v-show="restaurantSuggestionReview && showMoreInfo">
+    <div style="margin-left:3%; margin-right:3%;">
+          <p id="suggestionReview" style="text-align:center">
+            [[restaurantSuggestionReview]]
+          </p>
+    </div>
+  </section>
 
-  <hr v-if="restaurantSuggestionMVLink || restaurantSuggestionHomepage">
-  <section class="full-screen-section flexxing" id="restaurantLinks" v-show="restaurantSuggestionMVLink || restaurantSuggestionHomepage">
+  <hr v-if="restaurantSuggestionHomepage && showMoreInfo">
+  <section class="full-screen-section flexxing" id="restaurantLinks2" v-show="restaurantSuggestionHomepage && showMoreInfo">
+    <div class="container-fluid fill" style="margin-left:3%; margin-right:3%; margin-top:3%; margin-bottom:3%;">
+      <div class="row fill flexxing">
+        <div class="col-lg-12 fill">
+          <iframe class="embedded_window" v-bind:src=restaurantSuggestionHomepage style="width: 100%"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr v-if="restaurantSuggestionMVLink && showMoreInfo">
+  <section class="full-screen-section flexxing" id="restaurantLinks3" v-show="restaurantSuggestionMVLink && showMoreInfo">
+    <div class="container-fluid fill" style="margin-left:3%; margin-right:3%; margin-top:3%; margin-bottom:3%;">
+      <div class="row fill flexxing">
+        <div class="col-lg-12 fill">
+          <iframe class="embedded_window" v-bind:src=restaurantSuggestionMVLink style="width: 100%"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!--<hr v-if="(restaurantSuggestionMVLink || restaurantSuggestionHomepage) && showMoreInfo">
+  <section class="full-screen-section flexxing" id="restaurantLinks" v-show="(restaurantSuggestionMVLink || restaurantSuggestionHomepage)  && showMoreInfo">
     <div class="container-fluid fill">
       <div class="row fill flexxing">
         <div :class="restaurantSuggestionHomepage ? 'col-lg-6 fill' : 'col-lg-12 fill'" v-if="restaurantSuggestionMVLink">
@@ -100,11 +143,11 @@
         </div>
       </div>
     </div>
-  </section>
+  </section>-->
 
 
-  <hr v-if="restaurantSuggestionMap">
-  <section class="full-screen-section flexxing" id="bigmap" v-if="restaurantSuggestionMap">
+  <hr v-if="restaurantSuggestionMap && showMoreInfo">
+  <section class="full-screen-section flexxing" id="bigmap" v-if="restaurantSuggestionMap  && showMoreInfo">
     <div class="container-fluid fill">
       <div class="row fill flexxing">
         <iframe v-if="restaurantSuggestionMap" v-bind:src=[[restaurantSuggestionMap]] class="embedded_window" style="width:100%;" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>

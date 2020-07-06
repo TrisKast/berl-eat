@@ -98,6 +98,7 @@ class Restaurant(models.Model):
     special2 = models.CharField(max_length=60, choices=SPECIALS, blank=True, default='')
     special3 = models.CharField(max_length=60, choices=SPECIALS, blank=True, default='')
 
+    review = models.TextField(default='', blank=True)
     mVLink = models.CharField(max_length=60, default='', blank=True)
     homepage = models.CharField(max_length=60, default='', blank=True)
     googleMapsLink = models.CharField(max_length=600, default='', blank=True)

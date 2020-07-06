@@ -1,5 +1,3 @@
-//$('#suggestionSection').visibility='hidden'
-
 var app = new Vue({
   delimiters: ['[[', ']]'],
   el: '#app',
@@ -10,9 +8,11 @@ var app = new Vue({
       extra: 'A nice Time',
       cuisine: 'Tasty',
       restaurantSuggestion: '',
+      showMoreInfo: '',
       restaurantSuggestionMVLink: '',
       restaurantSuggestionHomepage: '',
       restaurantSuggestionMap: '',
+      restaurantSuggestionReview: '',
 
       district_list : [
           'Charlottenburg',
@@ -97,11 +97,12 @@ var app = new Vue({
 
         var self = this;
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        //var url = 'http://127.0.0.1:8000/api/restaurant_list/'
-        var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
+        var url = 'http://127.0.0.1:8000/api/restaurant_list/'
+        //var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
+        fetch(url)
 
 
-        fetch(proxyurl + url)
+        //fetch(proxyurl + url)
         .then((resp) => resp.json())
         .then(function(data){
 
@@ -150,21 +151,25 @@ var app = new Vue({
             self.restaurantSuggestionMVLink = data.mVLink
             self.restaurantSuggestionHomepage = data.homepage
             self.restaurantSuggestionMap = data.googleMapsLink
+            self.restaurantSuggestionReview = data.review
           } else {
-            console.log('This is nothing')
             self.restaurantSuggestion = {name: "Unfortunately we haven\'t any nice place for your selection yet. Feel free to drop us a suggestion !"}
             self.restaurantSuggestionMVLink = ''
             self.restaurantSuggestionHomepage = ''
             self.restaurantSuggestionMap = ''
+            self.restaurantSuggestionReview = ''
           }
 
           $('#suggestionSection').visibility='visible'
-          $('html,body').animate({scrollTop: $("#suggestionSection").offset().top},'slow');
+          //$('html,body').animate({scrollTop: $("#suggestionSection").offset().top},'slow');
 
 
 
         })
       },
+      toggle_showMoreInfo: function(){
+        this.showMoreInfo = true;
+      }
 
   }
 });

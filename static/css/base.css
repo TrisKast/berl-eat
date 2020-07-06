@@ -3,6 +3,8 @@
 .embedded_window{border:0;height:100%;}
 #landingSection{background-repeat: no-repeat; background-size: cover;}
 #suggestionJumbo{font-family:'Tangerine',serif;font-size:96px;}
+#more-info-text{font-family:'Tangerine',serif;font-size:36px;}
 #dropMailJumbo{font-family:'Tangerine',serif;font-size:62px;}
+#suggestionReview{font-family:'Montserrat',serif;font-size:26px;}
 @media only screen and (min-width:600px){.full-screen-section{height:100vh;}.quarter-screen-section{height:25vh;}.half-screen-section{height:50vh;}}
 @media only screen and (max-width:600px){.full-screen-section{height:100vh;}.quarter-screen-section{height:100vh;}.half-screen-section{height:100vh;}#bigmap{visibility:hidden;}}

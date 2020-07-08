@@ -38,10 +38,19 @@ var app = new Vue({
           'Wedding',
           'Weißensee',
           'Wilmersdorf',
-          'Zehlendorf'
+          'Zehlendorf',
+
+          'Nollendorfkiez'
       ],
 
       cuisine_list : [
+            'European',
+            'Asian',
+            'South-American',
+            'North-American',
+            'African',
+            'Oceania',
+
             'German',
             'Vietnamese',
             'Chinese',
@@ -109,12 +118,14 @@ var app = new Vue({
 
           if(self.district != 'Complete Berlin'){
             console.log('Check for district')
-            data = data.filter(entry => (entry.district == self.district));
+            data = data.filter(entry => (entry.district == self.district ||
+                                         entry.kiez == self.district));
           }
 
           if(self.cuisine != 'Tasty'){
             console.log('Check for cuisine')
-            data = data.filter(entry => (entry.cuisineTopTier == self.cuisine));
+            data = data.filter(entry => (entry.cuisineTopTier == self.cuisine ||
+                                         entry.cuisine == self.cuisine));
           }
 
           if(self.mealTime != 'Good Food'){

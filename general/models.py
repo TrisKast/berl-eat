@@ -29,6 +29,10 @@ DISTRICTS = [
     ('Zehlendorf','Zehlendorf'),
 ]
 
+KIEZ = [
+    ('Nollendorfkiez','Nollendorfkiez'),
+]
+
 MEAL_TIME = [
     ('Breakfast','Breakfast'),
     ('Brunch','Brunch'),
@@ -82,6 +86,7 @@ SPECIALS = [
 class Restaurant(models.Model):
     name = models.CharField(max_length=60)
     district = models.CharField(max_length=60, choices=DISTRICTS)
+    kiez = models.CharField(max_length=60, choices=KIEZ, blank=True, default='')
 
     cuisineTopTier = models.CharField(max_length=60, choices=CUISINE_TOPTIER)
     cuisine = models.CharField(max_length=60, choices=CUISINE)

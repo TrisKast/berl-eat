@@ -39,53 +39,14 @@
   {% endif %}
 
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand abs" href="#"><img src="static/images/berl-icon.png" width="30" height="30"></a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-top:0; padding-bottom:0">
+    <a class="navbar-brand abs" href="#" style="padding-top:0; padding-bottom:0;"><img src="static/images/berl-icon.png" width="30" height="30"></a>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a class="nav-link" href="{% url 'about' %}">About</a>
       </li>
     </ul>
   </nav>
-
-  <!--<nav class="navbar fixed-top navbar-expand-lg navbar-light">
-      <a class="navbar-brand abs" href="#">Navbar 1</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-collapse collapse" id="collapsingNavbar">
-          <ul class="navbar-nav">
-              <li class="nav-item active">
-                  <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="//codeply.com">Codeply</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="#myAlert" data-toggle="collapse">Link</a>
-              </li>
-          </ul>
-          <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                  <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">About</a>
-              </li>
-          </ul>
-      </div>
-  </nav>-->
-
-  <!--<nav class="navbar fixed-top navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="#">Berl-Eat</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse order-3" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-      </ul>
-    </div>
-  </nav>-->
 
   <section class="full-screen-section flexxing" id="landingSection" style="background-image: url('{% static "images/berlinbackground.jpg" %}');">
     <div>
@@ -138,10 +99,10 @@
   <hr v-if="restaurantSuggestion">
   <section id="suggestionSection" class="full-screen-section flexxing" v-if="restaurantSuggestion">
     <div>
-      <p id="suggestionJumbo" style="text-align:center">
+      <p id="suggestionJumbo" style="text-align:center; padding-right:2%; padding-left:2%">
         [[restaurantSuggestion.name]], <br> [[restaurantSuggestion.district]]
       </p>
-      <button type="submit" @click="toggle_showMoreInfo" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none; margin:auto; padding:auto;padding-top: 15%;"><img src="{% static 'images/downarrow.png' %}" style="height:15%; width: 15%;"></button>
+      <button v-if="moreInfoAvailable" type="submit" @click="toggle_showMoreInfo" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none; margin:auto; padding:auto;padding-top: 15%;"><img src="{% static 'images/downarrow.png' %}" style="height:15%; width: 15%;"></button>
     </div>
   </section>
 
@@ -201,15 +162,15 @@
     </div>
   </section>
 
-  <hr v-if="showMoreInfo">
-  <section id="contactSection" class="full-screen-section flexxing" v-if="showMoreInfo">
+  <hr v-if="showContactForm">
+  <section id="contactSection" class="full-screen-section flexxing" v-if="showContactForm">
 
     <div>
       <div class="row">
         <div class="col-lg-1">
         </div>
         <div class="col-lg-10 contact-form">
-          <p id="dropMailJumbo" style="text-align:center">
+          <p v-if="moreInfoAvailable" id="dropMailJumbo" style="text-align:center">
             We're always looking for new places to spend quality time. If your favorite place is missing please drop us a mail!
           </p>
           <form action="" method="post">
@@ -243,16 +204,22 @@
   </section>
 
 
-  <footer class="page-footer font-small" style="background-color:#343A40; color:#C7C7C7">
-    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+  <!--<footer class="page-footer font-small" style="background-color:#343A40; color:#C7C7C7">
+    <div class="text-center py-3">© 2020 Copyright:
       <a>Tristan Kast</a>
+    </div>
+  </footer>-->
+
+  <footer class="footer">
+    <div class="text-center py-3">
+      <span class="text-muted">© 2020 Copyright:
+        <a>Tristan Kast</a></span>
     </div>
   </footer>
 
-
 </div>
 
-<script src="{% static 'js/general.js' %}"></script>
+<script type="module" src="{% static 'js/general.js' %}"></script>
 
 
 

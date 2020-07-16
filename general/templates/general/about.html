@@ -29,8 +29,8 @@
 <body>
 <div id="app">
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand abs" href="#"><img src="static/images/berl-icon.png" width="30" height="30"></a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-top:0; padding-bottom:0">
+    <a class="navbar-brand abs" href="#" style="padding-top:0; padding-bottom:0;"><img src="static/images/berl-icon.png" width="30" height="30"></a>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a class="nav-link" href="{% url 'about' %}">About</a>
@@ -41,17 +41,27 @@
 
   <section class="full-screen-section flexxing" id="about">
     <div style="margin-left:3%; margin-right:3%;">
-          <p id="about-text" style="text-align:center">
-              hello
+          <p id="about-text" style="text-align:center; text-align: justify;">
+              Hi! My name is Tristan and I'm the developer of berl-eat. The idea for this project was born when I moved to Berlin with my girlfriend at the beginning of the year and we were overwhelmed by the enormous number of incredibly good restaurants. Since we wanted to visit the best places first, we did some research and ended up with a very very long list of places to choose from. Therefore I built a small program to pick a restaurant for us based on the cuisine whe would like to have and the location of the restaurant. I thought that such a program could certainly be useful to other people as well. For example if you have landed in a district and don't want to scroll through 100 google maps first to find a place to eat.               Personally, I'm not a web developer at all, so the site is far from being perfect and there are certainly some developers who could have done a better job. But that's not what it's about, it's about having a good time with a good meal in this great city.
+          </p>
+          <p id="about-text" style="text-align:center; text-align: justify;">
+              If I like a restaurant in particular I try to write a short comment on my own and in any case I link the homepage of the restaurant and mark it in GoogleMaps.
+              The website 'mitVergnügen.de' helped me a lot to find these restaurants and if they have a post about the place I'll link it too.
+          </p>
+          <p id="about-text" style="text-align:center; text-align: justify;">
+              I don't get any sponsoring or money in general, so these suggestions are based only on recommendations or my own experiences.  If you know a nice place or are an owner yourself please do not hesistate to drop me an email and I will be happy to test and also add your place.
+              So much from me, happy restaurant testing, have a nice meal and an even nicer time,
+              Tristan
           </p>
     </div>
   </section>
 
 
 
-  <footer class="page-footer font-small" style="background-color:#343A40; color:#C7C7C7">
-    <div class="footer-copyright text-center py-3">© 2020 Copyright:
-      <a>Tristan Kast</a>
+  <footer class="footer">
+    <div class="text-center py-3">
+      <span class="text-muted">© 2020 Copyright:
+        <a>Tristan Kast</a></span>
     </div>
   </footer>
 

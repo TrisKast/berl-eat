@@ -31,6 +31,8 @@ DISTRICTS = [
 
 KIEZ = [
     ('Nollendorfkiez','Nollendorfkiez'),
+    ('Reuterkiez','Reuterkiez'),
+    ('Kungerkiez','Kungerkiez'),
 ]
 
 MEAL_TIME = [
@@ -54,6 +56,7 @@ CUISINE_TOPTIER = [
 ]
 
 CUISINE = [
+    ('Fusion','Fusion'),
     ('German','German'),
     ('Vietnamese','Vietnamese'),
     ('Chinese','Chinese'),
@@ -78,7 +81,7 @@ CUISINE = [
 ]
 
 SPECIALS = [
-    ('Outdoor Seating','Outdoor Seating'),
+    ('Amazing Outdoor Seating','Amazing Outdoor Seating'),
     ('Vegetarian Options','Vegetarian Options'),
     ('Vegan Options','Vegan Options'),
 ]

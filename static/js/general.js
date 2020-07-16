@@ -1,3 +1,9 @@
+// If we would want to import something do it here.
+// The thing to import has to be an 'export' flag
+
+import { thingToExport } from './test.js';
+console.log(thingToExport)
+
 var app = new Vue({
   delimiters: ['[[', ']]'],
   el: '#app',
@@ -13,6 +19,8 @@ var app = new Vue({
       restaurantSuggestionHomepage: '',
       restaurantSuggestionMap: '',
       restaurantSuggestionReview: '',
+      moreInfoAvailable: false,
+      showContactForm: false,
 
       district_list : [
           'Charlottenburg',
@@ -104,6 +112,15 @@ var app = new Vue({
       },
       searchRestaurant: function(){
 
+        this.restaurantSuggestion = ''
+        this.showMoreInfo = ''
+        this.restaurantSuggestionMVLink = ''
+        this.restaurantSuggestionHomepage = ''
+        this.restaurantSuggestionMap = ''
+        this.restaurantSuggestionReview = ''
+        this.moreInfoAvailable = false
+        this.showContactForm = false
+
         var self = this;
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
         var url = 'http://127.0.0.1:8000/api/restaurant_list/'
@@ -163,16 +180,20 @@ var app = new Vue({
             self.restaurantSuggestionHomepage = data.homepage
             self.restaurantSuggestionMap = data.googleMapsLink
             self.restaurantSuggestionReview = data.review
+            self.moreInfoAvailable = true
+
           } else {
             self.restaurantSuggestion = {name: "Unfortunately we haven\'t any nice place for your selection yet. Feel free to drop us a suggestion !"}
             self.restaurantSuggestionMVLink = ''
             self.restaurantSuggestionHomepage = ''
             self.restaurantSuggestionMap = ''
             self.restaurantSuggestionReview = ''
+            self.showContactForm = true;
           }
 
+
           $('#suggestionSection').visibility='visible'
-          //$('html,body').animate({scrollTop: $("#suggestionSection").offset().top},'slow');
+
 
 
 
@@ -180,6 +201,8 @@ var app = new Vue({
       },
       toggle_showMoreInfo: function(){
         this.showMoreInfo = true;
+        this.showContactForm = true;
+        this.moreInfoAvailable = true;
       }
 
   }

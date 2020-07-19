@@ -33,6 +33,7 @@ KIEZ = [
     ('Nollendorfkiez','Nollendorfkiez'),
     ('Reuterkiez','Reuterkiez'),
     ('Kungerkiez','Kungerkiez'),
+    ('Wrangelkiez','Wrangelkiez'),
 ]
 
 MEAL_TIME = [
@@ -82,8 +83,9 @@ CUISINE = [
 
 SPECIALS = [
     ('Amazing Outdoor Seating','Amazing Outdoor Seating'),
-    ('Vegetarian Options','Vegetarian Options'),
-    ('Vegan Options','Vegan Options'),
+    ('Extraordinary Flair','Extraordinary Flair'),
+    ('Happy Vegans','Happy Vegans'),
+    ('Fine Dining','Fine Dining'),
 ]
 
 class Restaurant(models.Model):

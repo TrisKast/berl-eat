@@ -48,7 +48,10 @@ var app = new Vue({
           'Wilmersdorf',
           'Zehlendorf',
 
-          'Nollendorfkiez'
+          'Nollendorfkiez',
+          'Wrangelkiez',
+          'Reuterliez',
+          'Reuterkiez'
       ],
 
       cuisine_list : [
@@ -94,8 +97,9 @@ var app = new Vue({
 
       special_list : [
         'Outdoor Seating',
-        'Vegetarian Options',
-        'Vegan Options'
+        'Happy Vegans',
+        'Extraordinary Flair',
+        'Fine Dining'
       ]
     }
   },
@@ -194,16 +198,35 @@ var app = new Vue({
 
           $('#suggestionSection').visibility='visible'
 
+          var vheight = $(window).height();
+          $('html, body').animate({
+            scrollTop: (Math.floor($(window).scrollTop() / vheight)+1) * vheight
+          }, 500);
 
 
 
         })
       },
+
       toggle_showMoreInfo: function(){
         this.showMoreInfo = true;
         this.showContactForm = true;
         this.moreInfoAvailable = true;
-      }
+
+        var vheight = $(window).height();
+        $('html, body').animate({
+          scrollTop: (Math.floor($(window).scrollTop() / vheight)+1) * vheight
+        }, 500);
+      },
+
+
+
 
   }
 });
+
+/*var scroll_button = document.getElementById('scroll_button')
+scroll_button.onclick = function() {
+
+	window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+}*/

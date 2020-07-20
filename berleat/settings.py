@@ -27,14 +27,14 @@ SECRET_KEY = 'mlmdzqlvc(tee#gdl_$)u#809lwvrq_s*wc(p(sjwbhn55d=yv'
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
-ALLOWED_HOSTS = ['127.0.0.1', ]
-DEBUG = True
+#ALLOWED_HOSTS = ['127.0.0.1', ]
+#DEBUG = True
 
 
 
-#DEBUG = False
-#ALLOWED_HOSTS = ['berl-eat.herokuapp.com', '127.0.0.1']
-#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+DEBUG = False
+ALLOWED_HOSTS = ['berl-eat.herokuapp.com', '127.0.0.1']
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Application definition
@@ -101,6 +101,9 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+
+
 
 
 db_from_env = dj_database_url.config(conn_max_age=600)

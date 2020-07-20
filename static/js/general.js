@@ -50,7 +50,6 @@ var app = new Vue({
 
           'Nollendorfkiez',
           'Wrangelkiez',
-          'Reuterliez',
           'Reuterkiez'
       ],
 

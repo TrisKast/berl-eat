@@ -126,12 +126,12 @@ var app = new Vue({
 
         var self = this;
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        var url = 'http://127.0.0.1:8000/api/restaurant_list/'
-        //var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
-        fetch(url)
+        //var url = 'http://127.0.0.1:8000/api/restaurant_list/'
+        var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
+        //fetch(url)
 
 
-        //fetch(proxyurl + url)
+        fetch(proxyurl + url)
         .then((resp) => resp.json())
         .then(function(data){
 
@@ -218,14 +218,5 @@ var app = new Vue({
         }, 500);
       },
 
-
-
-
   }
 });
-
-/*var scroll_button = document.getElementById('scroll_button')
-scroll_button.onclick = function() {
-
-	window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-}*/

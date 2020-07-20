@@ -34,10 +34,7 @@ SECRET_KEY = 'mlmdzqlvc(tee#gdl_$)u#809lwvrq_s*wc(p(sjwbhn55d=yv'
 
 DEBUG = False
 ALLOWED_HOSTS = ['berl-eat.herokuapp.com', '127.0.0.1']
-CORS_ORIGIN_WHITELIST = [
-                            'http://berl-eat.herokuapp.com',
-                            'http://127.0.0.1'
-                        ]
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
@@ -70,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'berleat.urls'
 
@@ -164,3 +162,10 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER =  os.environ.get('DJANGO_EMAIL_USER')
 EMAIL_HOST_PASSWORD =  os.environ.get('DJANGO_EMAIL_PASSWORD')
+
+
+CORS_ORIGIN_WHITELIST = [
+                            'http://berl-eat.herokuapp.com',
+                            'http://127.0.0.1',
+                            'localhost:8000'
+                        ]

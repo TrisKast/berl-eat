@@ -34,6 +34,7 @@ SECRET_KEY = 'mlmdzqlvc(tee#gdl_$)u#809lwvrq_s*wc(p(sjwbhn55d=yv'
 
 DEBUG = False
 ALLOWED_HOSTS = ['berl-eat.herokuapp.com', '127.0.0.1']
+CORS_ORIGIN_WHITELIST = ['berl-eat.herokuapp.com', '127.0.0.1']
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'corsheaders',
 
     'api',
     'general',
@@ -55,7 +57,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-
+    'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',

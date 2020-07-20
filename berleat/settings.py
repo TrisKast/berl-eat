@@ -34,7 +34,10 @@ SECRET_KEY = 'mlmdzqlvc(tee#gdl_$)u#809lwvrq_s*wc(p(sjwbhn55d=yv'
 
 DEBUG = False
 ALLOWED_HOSTS = ['berl-eat.herokuapp.com', '127.0.0.1']
-CORS_ORIGIN_WHITELIST = ['berl-eat.herokuapp.com', '127.0.0.1']
+CORS_ORIGIN_WHITELIST = [
+                            'http://berl-eat.herokuapp.com',
+                            'http://127.0.0.1'
+                        ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
@@ -103,6 +106,8 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+
 
 
 

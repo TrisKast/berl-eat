@@ -31,9 +31,11 @@
 #landingSection{background-repeat: no-repeat; background-size: cover;}
 #suggestionJumbo{font-family:'Tangerine',serif;font-size:96px;}
 #more-info-text{font-family:'Tangerine',serif;font-size:36px;}
-#dropMailJumbo{font-family:'Tangerine',serif;font-size:62px;}
+#dropMailJumbo{font-family:'Tangerine',serif;font-size:50px;}
 #suggestionReview{font-family:'Montserrat',serif;font-size:26px;}
 
+
+/* For mobile */
 @media only screen and (max-width:991px){
 	.selection-dropdown{
 		margin-left: 3em;
@@ -47,9 +49,10 @@
 		padding-left: 3em;
 		padding-right: 3em;
 	}
-
 	#dropMailJumbo{
 		margin-left: 2em;
 		margin-right: 2em;
+    font-size:40px;
+
 	}
 }

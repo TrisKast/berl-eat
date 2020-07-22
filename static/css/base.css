@@ -7,6 +7,7 @@
     background:transparent;
 }
 
+/* For desktop screens */
 @media only screen and (min-width:991px){
 	.full-screen-section{height:100vh;}
 	.quarter-screen-section{height:25vh;}

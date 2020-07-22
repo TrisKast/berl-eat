@@ -52,7 +52,7 @@
     </ul>
   </nav>
 
-  <section class="full-screen-section flexxing" id="landingSection" style="background-image: url('{% static "images/berlinbackground.jpg" %}');">
+  <section class="full-screen-section full-screen-mobil flexxing" id="landingSection" style="background-image: url('{% static "images/berlinbackground.jpg" %}');">
     <div>
     <div class="row mt-2 mb-2">
       <div class="col-lg-3">
@@ -101,7 +101,7 @@
 
 
   <hr v-if="restaurantSuggestion">
-  <section id="suggestionSection" class="full-screen-section flexxing" v-if="restaurantSuggestion">
+  <section id="suggestionSection" class="full-screen-section full-screen-mobil flexxing" v-if="restaurantSuggestion">
     <div>
       <p id="suggestionJumbo" style="text-align:center; padding-right:2%; padding-left:2%">
         [[restaurantSuggestion.name]], <br> [[restaurantSuggestion.district]]

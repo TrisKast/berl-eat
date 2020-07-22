@@ -1,0 +1,55 @@
+.contact-form form input {
+	width: 100%;
+	height: 51px;
+	border: 1px solid #e1e1e1;
+	padding-left: 2em;
+	font-size: 16px;
+	margin-bottom: 3em;
+}
+.contact-form form textarea {
+	width: 100%;
+	height: 150px;
+	border: 1px solid #e1e1e1;
+	padding-left: 2em;
+	font-size: 16px;
+	padding-top: 1em;
+	margin-bottom: 2em;
+	resize: none;
+}
+.contact-form form button {
+	font-size: 14px;
+	color: #ffffff;
+	padding: 1em 3em;
+	display: inline-block;
+	background: -webkit-gradient(linear, left top, right top, from(#eb3c5a), to(#f67831));
+	background: -o-linear-gradient(left, #eb3c5a, #f67831);
+	background: linear-gradient(to right, #eb3c5a, #f67831);
+	border: none;
+	text-transform: uppercase;
+}
+
+#landingSection{background-repeat: no-repeat; background-size: cover;}
+#suggestionJumbo{font-family:'Tangerine',serif;font-size:96px;}
+#more-info-text{font-family:'Tangerine',serif;font-size:36px;}
+#dropMailJumbo{font-family:'Tangerine',serif;font-size:62px;}
+#suggestionReview{font-family:'Montserrat',serif;font-size:26px;}
+
+@media only screen and (max-width:991px){
+	.selection-dropdown{
+		margin-left: 3em;
+		margin-right: 3em;
+	}
+	#SearchRestaurantButton{
+		margin-left: 3em;
+		margin-right: 3em;
+	}
+	.contact-form form{
+		padding-left: 3em;
+		padding-right: 3em;
+	}
+
+	#dropMailJumbo{
+		margin-left: 2em;
+		margin-right: 2em;
+	}
+}

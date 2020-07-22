@@ -109,8 +109,6 @@ DATABASES = {
 
 
 
-
-
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
@@ -167,5 +165,5 @@ EMAIL_HOST_PASSWORD =  os.environ.get('DJANGO_EMAIL_PASSWORD')
 CORS_ORIGIN_WHITELIST = [
                             'http://berl-eat.herokuapp.com',
                             'http://127.0.0.1',
-                            'localhost:8000'
+                            'https://localhost:8000'
                         ]

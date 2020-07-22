@@ -126,13 +126,16 @@ var app = new Vue({
 
         var self = this;
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        const own_proxyurl = "https://shrouded-basin-48331.herokuapp.com/";
-        //var url = 'http://127.0.0.1:8000/api/restaurant_list/'
         var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
+        fetch(proxyurl + url)
+
+
+        //const own_proxyurl = "https://shrouded-basin-48331.herokuapp.com/";
+        //var url = 'http://127.0.0.1:8000/api/restaurant_list/'
         //fetch(url)
 
 
-        fetch(own_proxyurl + url)
+
         .then((resp) => resp.json())
         .then(function(data){
 

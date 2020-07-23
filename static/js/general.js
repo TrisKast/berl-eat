@@ -9,82 +9,25 @@ var app = new Vue({
   el: '#app',
   data: function() {
     return{
+
+      // Define defaults when loading the page
       district: 'Complete Berlin',
       mealTime: 'Good Food',
       extra: 'A nice Time',
       cuisine: 'Tasty',
       restaurantSuggestion: '',
-      showMoreInfo: false,
-      displayRestaurantWebsite: false,
       restaurantSuggestionMVLink: '',
       restaurantSuggestionHomepage: '',
       restaurantSuggestionMap: '',
       restaurantSuggestionReview: '',
+      showMoreInfo: false,
       moreInfoAvailable: false,
       showContactForm: false,
 
-      district_list : [
-          'Charlottenburg',
-          'Friedrichshain',
-          'Hellersdorf',
-          'Hohenschoenhausen',
-          'Kreuzberg',
-          'Koepenick',
-          'Lichtenberg',
-          'Marzahn',
-          'Mitte',
-          'Moabit',
-          'Neukoelln',
-          'Pankow',
-          'Prenzlauer Berg',
-          'Reinickendorf',
-          'Schoeneberg',
-          'Spandau',
-          'Steglitz',
-          'Tempelhof',
-          'Tiergarten',
-          'Treptow',
-          'Wedding',
-          'Weißensee',
-          'Wilmersdorf',
-          'Zehlendorf',
+      district_list : [],
+      cuisine_list : [],
 
-          'Nollendorfkiez',
-          'Wrangelkiez',
-          'Reuterkiez'
-      ],
-
-      cuisine_list : [
-            'European',
-            'Asian',
-            'South-American',
-            'North-American',
-            'African',
-            'Oceania',
-
-            'German',
-            'Vietnamese',
-            'Chinese',
-            'Thai',
-            'Mexican',
-            'Italien',
-            'French',
-            'Hawaiien',
-            'Russian',
-            'Polish',
-            'Greek',
-            'French',
-            'Spanish',
-            'Taiwanese',
-            'Chilenian',
-            'Columbian',
-            'American',
-            'Turkish',
-            'Syrian',
-            'Austrian',
-            'Japanese',
-      ],
-
+      // These lists will most likely not change
       mealTime_list : [
         'Breakfast',
         'Brunch',
@@ -94,7 +37,6 @@ var app = new Vue({
         'Dinner',
         'Bar'
       ],
-
       special_list : [
         'Outdoor Seating',
         'Happy Vegans',
@@ -103,24 +45,72 @@ var app = new Vue({
       ]
     }
   },
+  mounted(){
+    this.compute_district_list();
+    this.compute_cuisine_list();
+  },
   methods: {
+
+      compute_cuisine_list: function(){
+        var self = this
+
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
+        fetch(proxyurl + url)
+
+        //var url = 'http://127.0.0.1:8000/api/restaurant_list/'
+        //fetch(url)
+
+        .then((resp) => resp.json())
+        .then(function(data){
+          const actual_cuisineTopTier_list = data.map((restaurant) => {
+            return restaurant.cuisineTopTier
+          })
+          const actual_cuisine_list = data.map((restaurant) => {
+            return restaurant.cuisine
+          })
+
+          self.cuisine_list = new Set([...actual_cuisineTopTier_list, ...actual_cuisine_list]);
+        })
+      },
+
+      compute_district_list: function(){
+        var self = this
+
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
+        fetch(proxyurl + url)
+
+        //var url = 'http://127.0.0.1:8000/api/restaurant_list/'
+        //fetch(url)
+
+        .then((resp) => resp.json())
+        .then(function(data){
+          const actual_district_list = data.map((restaurant) => {
+            return restaurant.district
+          })
+          const actual_kiez_list = data.map((restaurant) => {
+            return restaurant.kiez
+          })
+          const actual_kiez_list_filtered = actual_kiez_list.filter((kiez) => {
+            return kiez != ''
+          });
+
+          self.district_list = new Set([...actual_district_list, ...actual_kiez_list_filtered]);
+        })
+      },
+
+      // For mobile: Render the restaurants website only if the specific button is pressed
       toggleRestaurantWebsite: function(){
         $('#toggleRestaurantWebsite_button')[0].style.display = 'none';
         $('#restaurantWebsite')[0].style.display = 'block';
         $('#restaurantWebsite')[0].style.height = '100vh';
       },
-      getRandomSubarray: function(arr, size){
-        var shuffled = arr.slice(0), i = arr.length, temp, index;
-        while (i--) {
-            index = Math.floor((i + 1) * Math.random());
-            temp = shuffled[index];
-            shuffled[index] = shuffled[i];
-            shuffled[i] = temp;
-        }
-        return shuffled.slice(0, size);
-      },
+
+      // Main function
       searchRestaurant: function(){
 
+        // Since the button can be repressed without loading the page new, the defaults have to be established again
         this.restaurantSuggestion = ''
         this.showMoreInfo = false
         this.restaurantSuggestionMVLink = ''
@@ -130,7 +120,10 @@ var app = new Vue({
         this.moreInfoAvailable = false
         this.showContactForm = false
 
+        // Inside the fetch call this will be overwritten
         var self = this;
+
+        // Needed work around for the CORS problem
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
         var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
         fetch(proxyurl + url)
@@ -220,7 +213,6 @@ var app = new Vue({
       toggle_showMoreInfo: function(){
         this.showMoreInfo = true;
         this.showContactForm = true;
-        this.moreInfoAvailable = true;
 
         var vheight = $(window).height();
         $('html, body').animate({

@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import RestaurantSerializer
-from general.models import Restaurant
+from .serializers import RestaurantSerializer, DistrictSerializer
+from general.models import Restaurant, District
 
 # Create your views here.
 
@@ -20,6 +20,12 @@ def apiOverview(request):
 def restaurantList(request):
 	restaurants = Restaurant.objects.all().order_by('-id')
 	serializer = RestaurantSerializer(restaurants, many=True)
+	return Response(serializer.data)
+
+@api_view(['GET'])
+def districtList(request):
+	districts = District.objects.all().order_by('-id')
+	serializer = DistrictSerializer(districts, many=True)
 	return Response(serializer.data)
 
 @api_view(['GET'])

@@ -88,9 +88,16 @@ SPECIALS = [
     ('Fine Dining','Fine Dining'),
 ]
 
+class District(models.Model):
+    name = models.CharField(max_length=60)
+
+    def __str__(self):
+        return self.name
+
 class Restaurant(models.Model):
     name = models.CharField(max_length=60)
-    district = models.CharField(max_length=60, choices=DISTRICTS)
+    district = models.ForeignKey(District, on_delete=models.PROTECT)
+    #district = models.CharField(max_length=60, choices=DISTRICTS)
     kiez = models.CharField(max_length=60, choices=KIEZ, blank=True, default='')
 
     cuisineTopTier = models.CharField(max_length=60, choices=CUISINE_TOPTIER)

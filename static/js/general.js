@@ -14,7 +14,8 @@ var app = new Vue({
       extra: 'A nice Time',
       cuisine: 'Tasty',
       restaurantSuggestion: '',
-      showMoreInfo: '',
+      showMoreInfo: false,
+      displayRestaurantWebsite: false,
       restaurantSuggestionMVLink: '',
       restaurantSuggestionHomepage: '',
       restaurantSuggestionMap: '',
@@ -103,6 +104,11 @@ var app = new Vue({
     }
   },
   methods: {
+      toggleRestaurantWebsite: function(){
+        $('#toggleRestaurantWebsite_button')[0].style.display = 'none';
+        $('#restaurantWebsite')[0].style.display = 'block';
+        $('#restaurantWebsite')[0].style.height = '100vh';
+      },
       getRandomSubarray: function(arr, size){
         var shuffled = arr.slice(0), i = arr.length, temp, index;
         while (i--) {
@@ -116,7 +122,7 @@ var app = new Vue({
       searchRestaurant: function(){
 
         this.restaurantSuggestion = ''
-        this.showMoreInfo = ''
+        this.showMoreInfo = false
         this.restaurantSuggestionMVLink = ''
         this.restaurantSuggestionHomepage = ''
         this.restaurantSuggestionMap = ''

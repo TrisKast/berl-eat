@@ -2,10 +2,7 @@
 .flexxing{display:flex;align-items:center;justify-content:center;}
 .embedded_window{border:0;height:100%;}
 .full-screen-mobil{height:100vh;}
-
-.navbar-inner {
-    background:transparent;
-}
+.navbar-inner {background:transparent;}
 
 /* For desktop screens */
 @media only screen and (min-width:991px){

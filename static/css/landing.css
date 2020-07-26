@@ -16,7 +16,21 @@
 	margin-bottom: 2em;
 	resize: none;
 }
-.contact-form form button {
+.orange-button{
+	font-size: 14px;
+	color: #ffffff;
+	padding: 1em 3em;
+	display: inline-block;
+	background: -webkit-gradient(linear, left top, right top, from(#eb3c5a), to(#f67831));
+	background: -o-linear-gradient(left, #eb3c5a, #f67831);
+	background: linear-gradient(to right, #eb3c5a, #f67831);
+	border: none;
+	text-transform: uppercase;
+}
+.orange-link{
+	-webkit-appearance: button;
+	-moz-appearance: button;
+	appearance: button;
 	font-size: 14px;
 	color: #ffffff;
 	padding: 1em 3em;
@@ -33,8 +47,11 @@
 #more-info-text{font-family:'Tangerine',serif;font-size:36px;}
 #dropMailJumbo{font-family:'Tangerine',serif;font-size:50px;}
 #suggestionReview{font-family:'Montserrat',serif;font-size:26px;}
-
-
+#embeddedMap{
+	border:0;
+	height:100%;
+	width:100%;
+}
 
 /* For mobile */
 @media only screen and (max-width:991px){
@@ -55,26 +72,11 @@
 		margin-right: 1em;
     font-size:40px;
 	}
-	#toggleRestaurantWebsite_button{
-		display:inline;
-	}
-	#restaurantWebsite{
-		display: none;
-		margin-top:3%;
-		margin-bottom:3%;
-	}
 }
 
 /* For desktop screens */
 @media only screen and (min-width:991px){
 	#dropMailJumbo{
 		padding-bottom: 2em;
-	}
-	#restaurantWebsite{
-		margin-left:3%;
-		margin-right:3%;
-	}
-	#toggleRestaurantWebsite_button{
-		display: none;
 	}
 }

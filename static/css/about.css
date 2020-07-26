@@ -1,8 +1,4 @@
 #about-text{font-family:'Montserrat',serif;font-size:20px;}
-
-/* For mobile */
-@media only screen and (max-width:991px){
-  about-section{
-    padding: 3em;
-  }
+#about-section{
+  padding: 3em;
 }

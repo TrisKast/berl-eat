@@ -18,11 +18,15 @@ var app = new Vue({
       restaurantSuggestion: '',
       restaurantSuggestionMVLink: '',
       restaurantSuggestionHomepage: '',
+      restaurantSuggestionFacebook: '',
+      restaurantSuggestionTripadvisor: '',
       restaurantSuggestionMap: '',
       restaurantSuggestionReview: '',
       showMoreInfo: false,
       moreInfoAvailable: false,
       showContactForm: false,
+      restaurantLinks_colTag: '',
+      restaurantLinks_colNr: 0,
 
       district_list : [],
       cuisine_list : [],
@@ -51,11 +55,8 @@ var app = new Vue({
       compute_cuisine_list: function(){
         var self = this
 
-        //const proxyurl = "https://cors-anywhere.herokuapp.com/";
         var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
-        //fetch(proxyurl + url)
-
-        //var url = 'http://127.0.0.1:8000/api/restaurant_list/'
+        // var url = 'http://127.0.0.1:8000/api/restaurant_list/'
         fetch(url)
 
         .then((resp) => resp.json())
@@ -77,11 +78,8 @@ var app = new Vue({
       compute_district_list: function(){
         var self = this
 
-        //const proxyurl = "https://cors-anywhere.herokuapp.com/";
         var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
-        //fetch(proxyurl + url)
-
-        //var url = 'http://127.0.0.1:8000/api/restaurant_list/'
+        // var url = 'http://127.0.0.1:8000/api/restaurant_list/'
         fetch(url)
 
         .then((resp) => resp.json())
@@ -103,11 +101,8 @@ var app = new Vue({
       compute_special_list: function(){
         var self = this
 
-        //const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
-        //fetch(proxyurl + url)
-
-        //var url = 'http://127.0.0.1:8000/api/restaurant_list/'
+        //var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
+        var url = 'http://127.0.0.1:8000/api/restaurant_list/'
         fetch(url)
 
         .then((resp) => resp.json())
@@ -135,6 +130,8 @@ var app = new Vue({
         this.showMoreInfo = false
         this.restaurantSuggestionMVLink = ''
         this.restaurantSuggestionHomepage = ''
+        this.restaurantSuggestionTripadvisor = ''
+        this.restaurantSuggestionFacebbok = ''
         this.restaurantSuggestionMap = ''
         this.restaurantSuggestionReview = ''
         this.moreInfoAvailable = false
@@ -143,14 +140,9 @@ var app = new Vue({
         // Inside the fetch call this will be overwritten
         var self = this;
 
-        // Needed work around for the CORS problem
-        const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        const own_proxyurl = "https://shrouded-basin-48331.herokuapp.com/";
         const url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
-        //const url = 'http://127.0.0.1:8000/api/restaurant_list/'
+        // const url = 'http://127.0.0.1:8000/api/restaurant_list/'
 
-        //fetch(proxyurl + url)
-        //fetch(own_proxyurl + url)
         fetch(url)
 
         .then((resp) => resp.json())
@@ -201,20 +193,26 @@ var app = new Vue({
             self.restaurantSuggestion = data
             self.restaurantSuggestionMVLink = data.mVLink
             self.restaurantSuggestionHomepage = data.homepage
+            self.restaurantSuggestionTripadvisor = data.tripadvisor
+            self.restaurantSuggestionFacebook = data.facebook
             self.restaurantSuggestionReview = data.review
             self.moreInfoAvailable = true
             var mapsSourceTag = data.googleMapsLink.split(" ")[1];
             self.restaurantSuggestionMap = mapsSourceTag.substring(5, mapsSourceTag.length - 1);
-
-
           } else {
             self.restaurantSuggestion = {name: "Unfortunately we haven\'t any nice place for your selection yet. Feel free to drop us a suggestion !"}
-            self.restaurantSuggestionMVLink = ''
-            self.restaurantSuggestionHomepage = ''
-            self.restaurantSuggestionMap = ''
-            self.restaurantSuggestionReview = ''
             self.showContactForm = true;
           }
+
+          var infoLinks = [self.restaurantSuggestionMVLink, self.restaurantSuggestionHomepage, self.restaurantSuggestionTripadvisor, self.restaurantSuggestionFacebook];
+
+          for (var i = 0; i < infoLinks.length; i++) {
+            if(infoLinks[i] != null){
+              self.restaurantLinks_colNr += 1
+            }
+          }
+
+          self.restaurantLinks_colTag = 'col-lg-'+String(12/self.restaurantLinks_colNr)
 
           $('#suggestionSection').visibility='visible'
 

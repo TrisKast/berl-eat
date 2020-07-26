@@ -59,6 +59,8 @@ class Restaurant(models.Model):
     mVLink = models.CharField(max_length=60, blank=True, null=True)
     homepage = models.CharField(max_length=60, blank=True, null=True)
     googleMapsLink = models.CharField(max_length=600, blank=True, null=True)
+    tripadvisor = models.CharField(max_length=600, blank=True, null=True)
+    facebook = models.CharField(max_length=600, blank=True, null=True)
 
     def __str__(self):
         return self.name

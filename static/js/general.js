@@ -2,7 +2,7 @@
 // The thing to import has to be an 'export' flag
 
 import { thingToExport } from './test.js';
-console.log(thingToExport)
+
 
 var app = new Vue({
   delimiters: ['[[', ']]'],
@@ -26,6 +26,7 @@ var app = new Vue({
 
       district_list : [],
       cuisine_list : [],
+      special_list : [],
 
       // These lists will most likely not change
       mealTime_list : [
@@ -37,38 +38,37 @@ var app = new Vue({
         'Dinner',
         'Bar'
       ],
-      special_list : [
-        'Outdoor Seating',
-        'Happy Vegans',
-        'Extraordinary Flair',
-        'Fine Dining'
-      ]
     }
   },
   mounted(){
     this.compute_district_list();
     this.compute_cuisine_list();
+    this.compute_special_list();
   },
   methods: {
 
+      // Compute the values that need to be shown in the dropdown
       compute_cuisine_list: function(){
         var self = this
 
-        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        //const proxyurl = "https://cors-anywhere.herokuapp.com/";
         var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
-        fetch(proxyurl + url)
+        //fetch(proxyurl + url)
 
         //var url = 'http://127.0.0.1:8000/api/restaurant_list/'
-        //fetch(url)
+        fetch(url)
 
         .then((resp) => resp.json())
         .then(function(data){
-          const actual_cuisineTopTier_list = data.map((restaurant) => {
+          var actual_cuisineTopTier_list = data.map((restaurant) => {
             return restaurant.cuisineTopTier
           })
-          const actual_cuisine_list = data.map((restaurant) => {
+          var actual_cuisine_list = data.map((restaurant) => {
             return restaurant.cuisine
           })
+
+          actual_cuisine_list = [].concat.apply([], actual_cuisine_list);
+          actual_cuisineTopTier_list = [].concat.apply([], actual_cuisineTopTier_list);
 
           self.cuisine_list = new Set([...actual_cuisineTopTier_list, ...actual_cuisine_list]);
         })
@@ -77,12 +77,12 @@ var app = new Vue({
       compute_district_list: function(){
         var self = this
 
-        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        //const proxyurl = "https://cors-anywhere.herokuapp.com/";
         var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
-        fetch(proxyurl + url)
+        //fetch(proxyurl + url)
 
         //var url = 'http://127.0.0.1:8000/api/restaurant_list/'
-        //fetch(url)
+        fetch(url)
 
         .then((resp) => resp.json())
         .then(function(data){
@@ -97,6 +97,26 @@ var app = new Vue({
           });
 
           self.district_list = new Set([...actual_district_list, ...actual_kiez_list_filtered]);
+        })
+      },
+
+      compute_special_list: function(){
+        var self = this
+
+        //const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
+        //fetch(proxyurl + url)
+
+        //var url = 'http://127.0.0.1:8000/api/restaurant_list/'
+        fetch(url)
+
+        .then((resp) => resp.json())
+        .then(function(data){
+          let actual_special_list = data.map((restaurant) => {
+            return restaurant.specials
+          })
+          actual_special_list = [].concat.apply([], actual_special_list);
+          self.special_list = new Set(actual_special_list);
         })
       },
 
@@ -125,15 +145,13 @@ var app = new Vue({
 
         // Needed work around for the CORS problem
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
-        fetch(proxyurl + url)
+        const own_proxyurl = "https://shrouded-basin-48331.herokuapp.com/";
+        const url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
+        //const url = 'http://127.0.0.1:8000/api/restaurant_list/'
 
-
-        //const own_proxyurl = "https://shrouded-basin-48331.herokuapp.com/";
-        //var url = 'http://127.0.0.1:8000/api/restaurant_list/'
-        //fetch(url)
-
-
+        //fetch(proxyurl + url)
+        //fetch(own_proxyurl + url)
+        fetch(url)
 
         .then((resp) => resp.json())
         .then(function(data){
@@ -169,7 +187,6 @@ var app = new Vue({
                                          entry.special3 == self.extra ));
           }
 
-
           var shuffled = data.slice(0), i = data.length, temp, index;
           while (i--) {
               index = Math.floor((i + 1) * Math.random());
@@ -184,9 +201,11 @@ var app = new Vue({
             self.restaurantSuggestion = data
             self.restaurantSuggestionMVLink = data.mVLink
             self.restaurantSuggestionHomepage = data.homepage
-            self.restaurantSuggestionMap = data.googleMapsLink
             self.restaurantSuggestionReview = data.review
             self.moreInfoAvailable = true
+            var mapsSourceTag = data.googleMapsLink.split(" ")[1];
+            self.restaurantSuggestionMap = mapsSourceTag.substring(5, mapsSourceTag.length - 1);
+
 
           } else {
             self.restaurantSuggestion = {name: "Unfortunately we haven\'t any nice place for your selection yet. Feel free to drop us a suggestion !"}
@@ -197,15 +216,12 @@ var app = new Vue({
             self.showContactForm = true;
           }
 
-
           $('#suggestionSection').visibility='visible'
 
           var vheight = $(window).height();
           $('html, body').animate({
             scrollTop: (Math.floor($(window).scrollTop() / vheight)+1) * vheight
           }, 500);
-
-
 
         })
       },

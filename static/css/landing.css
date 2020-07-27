@@ -47,6 +47,10 @@
 	margin-bottom: 1em;
 }
 
+.link-logo-container{
+	margin:auto;
+}
+
 #landingSection{background-repeat: no-repeat; background-size: cover;}
 #suggestionJumbo{font-family:'Tangerine',serif;font-size:96px;}
 #more-info-text{font-family:'Tangerine',serif;font-size:36px;}

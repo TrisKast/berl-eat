@@ -56,11 +56,12 @@ class Restaurant(models.Model):
     specials = models.ManyToManyField(Special, blank=True, null=True)
 
     review = models.TextField(blank=True, null=True)
-    mVLink = models.CharField(max_length=60, blank=True, null=True)
     homepage = models.CharField(max_length=60, blank=True, null=True)
+    mVLink = models.CharField(max_length=60, blank=True, null=True)
     googleMapsLink = models.CharField(max_length=600, blank=True, null=True)
-    tripadvisor = models.CharField(max_length=600, blank=True, null=True)
-    facebook = models.CharField(max_length=600, blank=True, null=True)
+    tripadvisorLink = models.CharField(max_length=600, blank=True, null=True)
+    facebookLink = models.CharField(max_length=600, blank=True, null=True)
+    instagramLink = models.CharField(max_length=600, blank=True, null=True)
 
     def __str__(self):
         return self.name

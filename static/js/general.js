@@ -16,10 +16,11 @@ var app = new Vue({
       extra: 'A nice Time',
       cuisine: 'Tasty',
       restaurantSuggestion: '',
-      restaurantSuggestionMVLink: '',
+      restaurantSuggestionMV: '',
       restaurantSuggestionHomepage: '',
       restaurantSuggestionFacebook: '',
       restaurantSuggestionTripadvisor: '',
+      restaurantSuggestionInstagram: '',
       restaurantSuggestionMap: '',
       restaurantSuggestionReview: '',
       showMoreInfo: false,
@@ -32,13 +33,13 @@ var app = new Vue({
       cuisine_list : [],
       special_list : [],
 
-      // These lists will most likely not change
+      // This lists will most likely not change
       mealTime_list : [
         'Breakfast',
         'Brunch',
         'Lunch',
         'Snack',
-        'Coffee',
+        'Coffee Break',
         'Dinner',
         'Bar'
       ],
@@ -128,26 +129,25 @@ var app = new Vue({
         // Since the button can be repressed without loading the page new, the defaults have to be established again
         this.restaurantSuggestion = ''
         this.showMoreInfo = false
-        this.restaurantSuggestionMVLink = ''
+        this.restaurantSuggestionMV = ''
         this.restaurantSuggestionHomepage = ''
         this.restaurantSuggestionTripadvisor = ''
         this.restaurantSuggestionFacebbok = ''
+        this.restaurantSuggestionInstagram = ''
         this.restaurantSuggestionMap = ''
         this.restaurantSuggestionReview = ''
         this.moreInfoAvailable = false
         this.showContactForm = false
 
-        // Inside the fetch call this will be overwritten
+        // Inside the fetch call 'this' will be overwritten
         var self = this;
 
         const url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
         // const url = 'http://127.0.0.1:8000/api/restaurant_list/'
 
         fetch(url)
-
         .then((resp) => resp.json())
         .then(function(data){
-
 
           if(self.district != 'Complete Berlin'){
             console.log('Check for district')
@@ -157,26 +157,18 @@ var app = new Vue({
 
           if(self.cuisine != 'Tasty'){
             console.log('Check for cuisine')
-            data = data.filter(entry => (entry.cuisineTopTier == self.cuisine ||
-                                         entry.cuisine == self.cuisine));
+            data = data.filter(entry => (entry.cuisineTopTier.includes(self.cuisine) ||
+                                         entry.cuisine.includes(self.cuisine)));
           }
 
           if(self.mealTime != 'Good Food'){
             console.log('Check for mealTime')
-            data = data.filter(entry => (entry.mealTime1 == self.mealTime ||
-                                         entry.mealTime2 == self.mealTime ||
-                                         entry.mealTime3 == self.mealTime ||
-                                         entry.mealTime4 == self.mealTime ||
-                                         entry.mealTime5 == self.mealTime ||
-                                         entry.mealTime6 == self.mealTime ||
-                                         entry.mealTime7 == self.mealTime ));
+            data = data.filter(entry => entry.mealtimes.includes(self.mealTime));
           }
 
           if(self.extra != 'A nice Time'){
             console.log('Check for extras')
-            data = data.filter(entry => (entry.special1 == self.extra ||
-                                         entry.special2 == self.extra ||
-                                         entry.special3 == self.extra ));
+            data = data.filter(entry => entry.specials.includes(self.extra));
           }
 
           var shuffled = data.slice(0), i = data.length, temp, index;
@@ -191,10 +183,11 @@ var app = new Vue({
 
           if (data){
             self.restaurantSuggestion = data
-            self.restaurantSuggestionMVLink = data.mVLink
+            self.restaurantSuggestionMV = data.mVLink
             self.restaurantSuggestionHomepage = data.homepage
-            self.restaurantSuggestionTripadvisor = data.tripadvisor
-            self.restaurantSuggestionFacebook = data.facebook
+            self.restaurantSuggestionTripadvisor = data.tripadvisorLink
+            self.restaurantSuggestionFacebook = data.facebookLink
+            self.restaurantSuggestionInstagram = data.instagramLink
             self.restaurantSuggestionReview = data.review
             self.moreInfoAvailable = true
             var mapsSourceTag = data.googleMapsLink.split(" ")[1];
@@ -204,7 +197,7 @@ var app = new Vue({
             self.showContactForm = true;
           }
 
-          var infoLinks = [self.restaurantSuggestionMVLink, self.restaurantSuggestionHomepage, self.restaurantSuggestionTripadvisor, self.restaurantSuggestionFacebook];
+          var infoLinks = [self.restaurantSuggestionMV, self.restaurantSuggestionHomepage, self.restaurantSuggestionTripadvisor, self.restaurantSuggestionFacebook, self.restaurantSuggestionInstagram];
 
           for (var i = 0; i < infoLinks.length; i++) {
             if(infoLinks[i] != null){

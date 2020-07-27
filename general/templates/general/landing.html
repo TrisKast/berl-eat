@@ -54,7 +54,6 @@
   </nav>
 
   <section class="full-screen-section full-screen-mobile flexxing" id="landingSection" style="background-image: url('{% static "images/berlinbackground.jpg" %}');">
-    <div>
     <div class="row mt-2 mb-2">
       <div class="col-lg-3">
         <div class="form-group selection-dropdown">
@@ -97,7 +96,6 @@
     <div class="row mt-4 mb-2">
       <button type="button" class="btn btn-dark btn-lg btn-block" id="SearchRestaurantButton" @click="searchRestaurant">Tell me where to eat!</button>
     </div>
-    </div>
   </section>
 
 
@@ -122,18 +120,32 @@
 
   <hr v-if="showMoreInfo">
   <section class="flexxing" id="restaurantLinks" v-show="showMoreInfo">
-    <div class="row">
-      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestionHomepage">
-        <a :href="restaurantSuggestionHomepage" class="btn btn-outline-dark btn-lg btn-block infoLink-button" role="button" aria-disabled="true">Homepage</a>
+    <div class="row" style="width:100%">
+      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestionHomepage" class="link-logo-container">
+        <!--<a :href="restaurantSuggestionHomepage" class="btn btn-outline-dark btn-lg btn-block infoLink-button" role="button" aria-disabled="true">Homepage</a>-->
+        <a :href="restaurantSuggestionHomepage" role="button" aria-disabled="true">
+          <img alt="Homepage" src="static/images/logo_homepage.png" width="80" height="80">
+        </a>
       </div>
-      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestionMVLink">
-        <a :href="restaurantSuggestionMVLink" class="btn btn-outline-dark btn-lg btn-block infoLink-button" role="button" aria-disabled="true">mitVergnügen</a>
+      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestionMV" class="link-logo-container">
+        <a :href="restaurantSuggestionMV" role="button" aria-disabled="true">
+          <img alt="mitVergnuegen" src="static/images/logo_mitVergnuegen.png" width="80" height="80">
+        </a>
       </div>
-      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestionTripadvisor">
-        <a :href="restaurantSuggestionMVLink" class="btn btn-outline-dark btn-lg btn-block infoLink-button" role="button" aria-disabled="true">Tripadvisor</a>
+      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestionTripadvisor" class="link-logo-container">
+        <a :href="restaurantSuggestionTripadvisor" role="button" aria-disabled="true">
+          <img alt="Tripadvisor" src="static/images/logo_tripadvisor.png" width="80" height="80">
+        </a>
       </div>
-      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestionFacebook">
-        <a :href="restaurantSuggestionMVLink" class="btn btn-outline-dark btn-lg btn-block infoLink-button" role="button" aria-disabled="true">Facebook</a>
+      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestionFacebook" class="link-logo-container">
+        <a :href="restaurantSuggestionFacebook" role="button" aria-disabled="true">
+          <img alt="Facebook" src="static/images/logo_fb.png" width="80" height="80">
+        </a>
+      </div>
+      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestionInstagram" class="link-logo-container">
+        <a :href="restaurantSuggestionInstagram" role="button" aria-disabled="true">
+          <img alt="Instagram" src="static/images/logo_ig.png" width="80" height="80">
+        </a>
       </div>
     </div>
   </section>
@@ -188,7 +200,7 @@
 
   </section>
 
-
+  <hr>
   <footer class="footer">
     <div class="text-center py-3">
       <p class="text-muted">© 2020 Copyright:Tristan Kast</p>

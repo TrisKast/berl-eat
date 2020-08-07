@@ -190,6 +190,9 @@ var app = new Vue({
             self.restaurantSuggestionInstagram = data.instagramLink
             self.restaurantSuggestionReview = data.review
             self.moreInfoAvailable = true
+            console.log(data.googleMapsLink)
+            console.log(data.googleMapsLink.split(" ")[1])
+            console.log(data.googleMapsLink.split(" ")[1].substring(5, mapsSourceTag.length - 1))
             var mapsSourceTag = data.googleMapsLink.split(" ")[1];
             self.restaurantSuggestionMap = mapsSourceTag.substring(5, mapsSourceTag.length - 1);
           } else {

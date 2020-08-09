@@ -205,7 +205,7 @@ var app = new Vue({
             }
           }
 
-          self.restaurantLinks_colTag = 'col-lg-'+String(12/self.restaurantLinks_colNr)
+          self.restaurantLinks_colTag = 'col-sm-'+String(12/self.restaurantLinks_colNr)
 
           $('#suggestionSection').visibility='visible'
 

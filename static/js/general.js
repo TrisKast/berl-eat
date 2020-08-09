@@ -223,7 +223,7 @@ var app = new Vue({
 
         var vheight = $(window).height();
         $('html, body').animate({
-          scrollTop: (Math.floor($(window).scrollTop() / vheight)+1) * vheight
+          scrollTop: (Math.floor($(window).scrollTop() / vheight)+10) * vheight
         }, 500);
       },
 

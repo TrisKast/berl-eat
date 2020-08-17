@@ -214,6 +214,9 @@ var app = new Vue({
           //   scrollTop: (Math.floor($(window).scrollTop() / vheight)+1) * vheight
           // }, 500);
 
+          var elmnt = document.getElementById("suggestionSection");
+          elmnt.scrollIntoView();
+
         })
       },
 

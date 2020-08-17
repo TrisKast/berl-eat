@@ -51,7 +51,14 @@
 	margin:auto;
 }
 
-#landingSection{background-repeat: no-repeat; background-size: cover;}
+#landingSection{
+	background-image: url('../images/berlinbackground.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+
+}
 #suggestionJumbo{font-family:'Tangerine',serif;font-size:96px;}
 #more-info-text{font-family:'Tangerine',serif;font-size:36px;}
 #dropMailJumbo{font-family:'Tangerine',serif;font-size:50px;}

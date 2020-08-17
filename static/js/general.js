@@ -209,10 +209,10 @@ var app = new Vue({
 
           $('#suggestionSection').visibility='visible'
 
-          var vheight = $(window).height();
-          $('html, body').animate({
-            scrollTop: (Math.floor($(window).scrollTop() / vheight)+1) * vheight
-          }, 500);
+          // var vheight = $(window).height();
+          // $('html, body').animate({
+          //   scrollTop: (Math.floor($(window).scrollTop() / vheight)+1) * vheight
+          // }, 500);
 
         })
       },

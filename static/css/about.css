@@ -1,4 +1,10 @@
-#about-text{font-family:'Montserrat',serif;font-size:20px;}
+.about-text{
+  font-family:'Montserrat',serif;
+  font-size:20px;
+  text-align:center;
+  text-align: justify;
+}
 #about-section{
   padding: 3em;
+  position:relative;
 }

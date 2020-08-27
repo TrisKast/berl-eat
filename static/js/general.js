@@ -1,12 +1,7 @@
-// If we would want to import something do it here.
-// The thing to import has to be an 'export' flag
-
-import { thingToExport } from './test.js';
-
-
 var app = new Vue({
   delimiters: ['[[', ']]'],
   el: '#app',
+
   data: function() {
     return{
 
@@ -15,19 +10,12 @@ var app = new Vue({
       mealTime: 'Good Food',
       extra: 'A nice Time',
       cuisine: 'Tasty',
+      restaurantLinks: false,
       restaurantSuggestion: '',
-      restaurantSuggestionMV: '',
-      restaurantSuggestionHomepage: '',
-      restaurantSuggestionFacebook: '',
-      restaurantSuggestionTripadvisor: '',
-      restaurantSuggestionInstagram: '',
-      restaurantSuggestionMap: '',
-      restaurantSuggestionReview: '',
-      showMoreInfo: false,
-      moreInfoAvailable: false,
-      showContactForm: false,
       restaurantLinks_colTag: '',
       restaurantLinks_colNr: 0,
+      review:'',
+      showContactForm: false,
 
       district_list : [],
       cuisine_list : [],
@@ -45,21 +33,22 @@ var app = new Vue({
       ],
     }
   },
+
   mounted(){
     this.compute_district_list();
     this.compute_cuisine_list();
     this.compute_special_list();
   },
+
   methods: {
 
-      // Compute the values that need to be shown in the dropdown
+      // Compute the values that need to be shown in the specific dropdown
       compute_cuisine_list: function(){
-        var self = this
+        const self = this
 
         var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
-        // var url = 'http://127.0.0.1:8000/api/restaurant_list/'
+        // const url = 'http://127.0.0.1:8000/api/restaurant_list/'
         fetch(url)
-
         .then((resp) => resp.json())
         .then(function(data){
           var actual_cuisineTopTier_list = data.map((restaurant) => {
@@ -77,12 +66,11 @@ var app = new Vue({
       },
 
       compute_district_list: function(){
-        var self = this
+        const self = this
 
         var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
-        // var url = 'http://127.0.0.1:8000/api/restaurant_list/'
+        // const url = 'http://127.0.0.1:8000/api/restaurant_list/'
         fetch(url)
-
         .then((resp) => resp.json())
         .then(function(data){
           const actual_district_list = data.map((restaurant) => {
@@ -100,12 +88,11 @@ var app = new Vue({
       },
 
       compute_special_list: function(){
-        var self = this
+        const self = this
 
         var url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
-        // var url = 'http://127.0.0.1:8000/api/restaurant_list/'
+        // const url = 'http://127.0.0.1:8000/api/restaurant_list/'
         fetch(url)
-
         .then((resp) => resp.json())
         .then(function(data){
           let actual_special_list = data.map((restaurant) => {
@@ -116,41 +103,25 @@ var app = new Vue({
         })
       },
 
-      // For mobile: Render the restaurants website only if the specific button is pressed
-      toggleRestaurantWebsite: function(){
-        $('#toggleRestaurantWebsite_button')[0].style.display = 'none';
-        $('#restaurantWebsite')[0].style.display = 'block';
-        $('#restaurantWebsite')[0].style.height = '100vh';
-      },
 
       // Main function
       searchRestaurant: function(){
 
         // Since the button can be repressed without loading the page new, the defaults have to be established again
         this.restaurantSuggestion = ''
-        this.showMoreInfo = false
-        this.restaurantSuggestionMV = ''
-        this.restaurantSuggestionHomepage = ''
-        this.restaurantSuggestionTripadvisor = ''
-        this.restaurantSuggestionFacebbok = ''
-        this.restaurantSuggestionInstagram = ''
-        this.restaurantSuggestionMap = ''
-        this.restaurantSuggestionReview = ''
-        this.moreInfoAvailable = false
-        this.showContactForm = false
+        this.restaurantLinks = false
 
         // Inside the fetch call 'this' will be overwritten
         var self = this;
-
         const url = 'https://berl-eat.herokuapp.com/api/restaurant_list/'
-        // const url = 'http://127.0.0.1:8000/api/restaurant_list/'
+        //const url = 'http://127.0.0.1:8000/api/restaurant_list/'
 
         fetch(url)
         .then((resp) => resp.json())
         .then(function(data){
 
           if(self.district != 'Complete Berlin'){
-            console.log('Check for district')
+            console.log('Check for district and kiez')
             data = data.filter(entry => (entry.district == self.district ||
                                          entry.kiez == self.district));
           }
@@ -171,6 +142,7 @@ var app = new Vue({
             data = data.filter(entry => entry.specials.includes(self.extra));
           }
 
+          // Pick one random entry from the returned restaurants
           var shuffled = data.slice(0), i = data.length, temp, index;
           while (i--) {
               index = Math.floor((i + 1) * Math.random());
@@ -179,56 +151,49 @@ var app = new Vue({
               shuffled[i] = temp;
           }
           data = shuffled.slice(0, 1)[0];
-          console.log(data)
 
+
+          // If there was a match
           if (data){
             self.restaurantSuggestion = data
-            self.restaurantSuggestionMV = data.mVLink
-            self.restaurantSuggestionHomepage = data.homepage
-            self.restaurantSuggestionTripadvisor = data.tripadvisorLink
-            self.restaurantSuggestionFacebook = data.facebookLink
-            self.restaurantSuggestionInstagram = data.instagramLink
-            self.restaurantSuggestionReview = data.review
-            self.moreInfoAvailable = true
-            var mapsSourceTag = data.googleMapsLink.split(" ")[1];
-            self.restaurantSuggestionMap = mapsSourceTag.substring(5, mapsSourceTag.length - 1);
+            self.review = data['review']
+            // Little parsing for the gogoleMaps link
+            var mapsSourceTag = self.restaurantSuggestion['googleMapsLink'].split(" ")[1];
+            self.restaurantSuggestion['googleMapsLink'] = mapsSourceTag.substring(5, mapsSourceTag.length - 1);
+            // Check if there is any link to an extenal website
+            if(data.mVLink || data.homepage || data.tripadvisorLink || data.facebookLink || data.instagramLink){
+              self.restaurantLinks = true;
+            }
           } else {
             self.restaurantSuggestion = {name: "Unfortunately we haven\'t any nice place for your selection yet. Feel free to drop us a suggestion !"}
-            self.showContactForm = true;
           }
 
-          var infoLinks = [self.restaurantSuggestionMV, self.restaurantSuggestionHomepage, self.restaurantSuggestionTripadvisor, self.restaurantSuggestionFacebook, self.restaurantSuggestionInstagram];
+          var infoLinks = [self.restaurantSuggestion['mVLink'],
+                            self.restaurantSuggestion['homepage'],
+                            self.restaurantSuggestion['tripadvisorLink'],
+                            self.restaurantSuggestion['facebookLink'],
+                            self.restaurantSuggestion['instagramLink']]
 
+          // Compute the col size in the link display row, depending on the number of external links
           for (var i = 0; i < infoLinks.length; i++) {
             if(infoLinks[i] != null){
               self.restaurantLinks_colNr += 1
             }
           }
-
           self.restaurantLinks_colTag = 'col-sm-'+String(12/self.restaurantLinks_colNr)
 
-          $('#suggestionSection').visibility='visible'
+          // Display the contact form in any case
+          self.showContactForm = true;
 
-          // var vheight = $(window).height();
-          // $('html, body').animate({
-          //   scrollTop: (Math.floor($(window).scrollTop() / vheight)+1) * vheight
-          // }, 500);
+          // If it is there scroll to it, if not scroll to where it would have been
 
-          var elmnt = document.getElementById("suggestionSection");
-          elmnt.scrollIntoView();
-
+          // Return promise to enable second 'then' clause, to enforce the scrolling to wait until the rest is computed
+          return Promise.all([true, true])
+        })
+        .then(function(data){
+          var elmnt = $("#suggestionSection")[0].scrollIntoView();
         })
       },
 
-      toggle_showMoreInfo: function(){
-        this.showMoreInfo = true;
-        this.showContactForm = true;
-
-        var vheight = $(window).height();
-        $('html, body').animate({
-          scrollTop: (Math.floor($(window).scrollTop() / vheight)+1) * vheight
-        }, 500);
-      },
-
-  }
+  },
 });

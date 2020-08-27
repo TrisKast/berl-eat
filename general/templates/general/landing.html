@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="main_html">
 {% load static %}
 
 
@@ -44,132 +44,150 @@
   {% endif %}
 
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-top:0; padding-bottom:0">
-    <a class="navbar-brand abs" href="#" style="padding-top:0; padding-bottom:0;"><img src="static/images/berl-icon.png" width="30" height="30"></a>
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'about' %}">About</a>
-      </li>
-    </ul>
-  </nav>
+
 
   <section class="full-screen-section full-screen-mobile flexxing" id="landingSection">
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand abs" href="#"><img src="static/images/berl-icon.png" width="30" height="30"></a>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'about' %}">About</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="selection-wrapper">
+      <div class="row mt-2 mb-2">
+        <div class="col-lg-3">
+          <div class="form-group selection-dropdown">
+            <label for="mealTime-select">I want to have:</label>
+            <select class="form-control" id="mealTime-select" v-model="mealTime">
+              <option selected>Good Food</option>
+              <option v-for="option in mealTime_list" :value="option">[[option]]</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="form-group selection-dropdown">
+            <label for="district-select">Somewhere in:</label>
+            <select class="form-control" id="district-select" v-model="district">
+              <option select>Complete Berlin</option>
+              <option v-for="option in district_list" :value="option">[[option]]</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="form-group selection-dropdown">
+            <label for="cuisine-select">My prefered cuisine:</label>
+            <select class="form-control" id="cuisine-select" v-model="cuisine">
+              <option select>Tasty</option>
+              <option v-for="option in cuisine_list" :value="option">[[option]]</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="form-group selection-dropdown">
+            <label for="extra-select">I'd love to have:</label>
+            <select class="form-control" id="extra-select" v-model="extra">
+              <option selected>A nice Time</option>
+              <option v-for="option in special_list" :value="option">[[option]]</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4 mb-2">
+        <button type="button" class="btn btn-dark btn-lg btn-block" id="SearchRestaurantButton" @click="searchRestaurant">
+          Tell me where to eat!
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section id="suggestionSection" v-bind:class="{ 'full-screen-mobile': restaurantSuggestion }" class="flexxing">
+    <nav id="second-navbar" class="second-navbar navbar-expand-lg"  v-if="restaurantLinks">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#suggestionSection">Suggestion</a>
+          </li>
+          <li class="nav-item" v-if="restaurantSuggestion['review']">
+            <a class="nav-link" href="#restaurantSuggestionReview">Comment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#restaurantLinks">Links</a>
+          </li>
+          <li class="nav-item" v-if="restaurantSuggestion['gogoleMaps']">
+            <a class="nav-link" href="#mapSection">Map</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contactSection">Contact</a>
+          </li>
+        </ul>
+    </nav>
     <div>
-    <div class="row mt-2 mb-2">
-      <div class="col-lg-3">
-        <div class="form-group selection-dropdown">
-          <label for="time-select">I want to have:</label>
-          <select class="form-control" id="time-select" v-model="mealTime">
-            <option selected>Good Food</option>
-            <option v-for="option in mealTime_list" :value="option">[[option]]</option>
-          </select>
-        </div>
+      <div id="suggestionJumbo">
+        <p id="suggestionName">[[restaurantSuggestion.name]]</p>
+        <p id="suggestionDistrict">[[restaurantSuggestion.district]]</p>
       </div>
-      <div class="col-lg-3">
-        <div class="form-group selection-dropdown">
-          <label for="district-select">Somewhere in:</label>
-          <select class="form-control" id="district-select" v-model="district">
-            <option select>Complete Berlin</option>
-            <option v-for="option in district_list" :value="option">[[option]]</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-lg-3">
-        <div class="form-group selection-dropdown">
-          <label for="cuisine-select">My prefered cuisine:</label>
-          <select class="form-control" id="cuisine-select" v-model="cuisine">
-            <option select>Tasty</option>
-            <option v-for="option in cuisine_list" :value="option">[[option]]</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-lg-3">
-        <div class="form-group selection-dropdown">
-          <label for="extra-select">I'd love to have:</label>
-          <select class="form-control" id="extra-select" v-model="extra">
-            <option selected>A nice Time</option>
-            <option v-for="option in special_list" :value="option">[[option]]</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <div class="row mt-4 mb-2">
-      <button type="button" class="btn btn-dark btn-lg btn-block" id="SearchRestaurantButton" @click="searchRestaurant" href="#suggestionSection">Tell me where to eat!</button>
-    </div>
     </div>
   </section>
 
-
-  <hr v-if="restaurantSuggestion">
-  <section id="suggestionSection" class="full-screen-mobile flexxing" v-if="restaurantSuggestion">
-    <div>
-      <p id="suggestionJumbo" style="text-align:center; padding-right:2%; padding-left:2%">
-        [[restaurantSuggestion.name]], <br> [[restaurantSuggestion.district]]
-      </p>
-      <button v-if="moreInfoAvailable && !showMoreInfo" type="submit" @click="toggle_showMoreInfo" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none; margin:auto; padding:auto;padding-top: 15%;"><img src="{% static 'images/downarrow.png' %}" style="height:15%; width: 15%;"></button>
-    </div>
-  </section>
-
-  <hr v-if="restaurantSuggestionReview && showMoreInfo">
-  <section class="full-screen-section flexxing" id="restaurantSuggestionSection" v-show="restaurantSuggestionReview && showMoreInfo">
-    <div style="margin-left:3%; margin-right:3%;">
-          <p id="suggestionReview" style="text-align:center">
-            [[restaurantSuggestionReview]]
-          </p>
-    </div>
-  </section>
-
-  <hr v-if="showMoreInfo">
-  <section class="flexxing" id="restaurantLinks" v-show="showMoreInfo">
-    <div class="row" style="width:100%">
-      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestionHomepage" class="link-logo-container flexxing">
-        <!--<a :href="restaurantSuggestionHomepage" class="btn btn-outline-dark btn-lg btn-block infoLink-button" role="button" aria-disabled="true">Homepage</a>-->
-        <a :href="restaurantSuggestionHomepage" role="button" aria-disabled="true">
+  <hr v-if="restaurantLinks">
+  <section class="flexxing" id="restaurantLinks" v-show="restaurantLinks">
+    <div class="row" id="link-row">
+      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestion['homepage']" class="link-logo-container flexxing">
+        <a :href="restaurantSuggestion['homepage']" role="button" aria-disabled="true">
           <img alt="Homepage" src="static/images/logo_homepage.png" width="80" height="80">
         </a>
       </div>
-      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestionMV" class="link-logo-container flexxing">
-        <a :href="restaurantSuggestionMV" role="button" aria-disabled="true">
+      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestion['mVLink']" class="link-logo-container flexxing">
+        <a :href="restaurantSuggestion['mVLink']" role="button" aria-disabled="true">
           <img alt="mitVergnuegen" src="static/images/logo_MitVergnuegen.png" width="80" height="80">
         </a>
       </div>
-      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestionTripadvisor" class="link-logo-container flexxing">
-        <a :href="restaurantSuggestionTripadvisor" role="button" aria-disabled="true">
+      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestion['tripadvisorLink']" class="link-logo-container flexxing">
+        <a :href="restaurantSuggestion['tripadvisorLink']" role="button" aria-disabled="true">
           <img alt="Tripadvisor" src="static/images/logo_tripadvisor.png" width="80" height="80">
         </a>
       </div>
-      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestionFacebook" class="link-logo-container flexxing">
-        <a :href="restaurantSuggestionFacebook" role="button" aria-disabled="true">
+      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestion['facebookLink']" class="link-logo-container flexxing">
+        <a :href="restaurantSuggestion['facebookLink']" role="button" aria-disabled="true">
           <img alt="Facebook" src="static/images/logo_fb.png" width="80" height="80">
         </a>
       </div>
-      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestionInstagram" class="link-logo-container flexxing">
-        <a :href="restaurantSuggestionInstagram" role="button" aria-disabled="true">
+      <div :class="restaurantLinks_colTag" v-show="restaurantSuggestion['instagramLink']" class="link-logo-container flexxing">
+        <a :href="restaurantSuggestion['instagramLink']" role="button" aria-disabled="true">
           <img alt="Instagram" src="static/images/logo_ig.png" width="80" height="80">
         </a>
       </div>
     </div>
   </section>
 
-  <hr v-show="restaurantSuggestionMap && showMoreInfo">
-  <section class="full-screen-mobile flexxing" v-show="restaurantSuggestionMap  && showMoreInfo">
-    <div class="container-fluid fill">
-      <div class="row fill flexxing">
-        <iframe v-bind:src=[[restaurantSuggestionMap]] id="embeddedMap" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-      </div>
+  <hr v-if="restaurantSuggestion['review']">
+  <section class="full-screen-section flexxing" id="restaurantSuggestionReview" v-show="restaurantSuggestion['review']">
+    <div id="suggestionReview-container">
+          <p id="suggestionReview">
+            [[review]]
+          </p>
     </div>
   </section>
 
-  <hr v-if="showContactForm">
+  <hr v-show="restaurantSuggestion['googleMapsLink']">
+  <section class="full-screen-mobile flexxing" id="mapSection" v-show="restaurantSuggestion['googleMapsLink']">
+    <div class="container-fluid fill flexxing">
+        <iframe v-bind:src=[[restaurantSuggestion['googleMapsLink']]] id="embeddedMap" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+    </div>
+  </section>
+
+  <hr>
   <section id="contactSection" class="full-screen-section flexxing" v-if="showContactForm">
 
-    <div>
       <div class="row">
         <div class="col-lg-1">
         </div>
         <div class="col-lg-10 contact-form">
-          <p v-if="moreInfoAvailable" id="dropMailJumbo" style="text-align:center">
+          <p id="dropMailJumbo">
             We're always looking for new places to spend quality time. If your favorite place is missing please drop us a mail!
           </p>
           <form action="" method="post">
@@ -191,23 +209,24 @@
                       {{ form.visitor_message.label }}
                       {{ form.visitor_message }}
                   </div>
-                  <button class="orange-button" style="margin:auto;" type="submit">Send Message</button>
+                  <button id="send-contact-form-button" type="submit">Send Message</button>
               </div>
           </form>
         </div>
         <div class="col-lg-1">
         </div>
       </div>
-    </div>
 
   </section>
 
-  <hr>
   <footer class="footer">
     <div class="text-center py-3">
       <p class="text-muted">© 2020 Copyright:Tristan Kast</p>
       <p class="text-muted">
          <a class="footer-link" href="https://icons8.com/icon/41494/berliner-fernsehturm">Berliner Fernsehturm icon by Icons8</a> | <span>Berlin Title Photo by <a class="footer-link" href="https://unsplash.com/@purzlbaum?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText"> Claudio Schwarz | @purzlbaum</a> on <a class="footer-link" href="https://unsplash.com/s/photos/berlin?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+      </p>
+      <p class="text-muted">
+         <a class="footer-link" href="{% url 'about' %}"> Privacy </a><span> | </span><a class="footer-link" href="{% url 'about' %}"> Imprint </a>
       </p>
     </div>
   </footer>

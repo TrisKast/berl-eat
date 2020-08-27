@@ -93,6 +93,7 @@ WSGI_APPLICATION = 'berleat.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
+# This variables are actually not configured in heroku, but it runs anyway ?
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -154,8 +155,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER =  os.environ.get('DJANGO_EMAIL_USER')
-EMAIL_HOST_PASSWORD =  os.environ.get('DJANGO_EMAIL_PASSWORD')
+EMAIL_HOST_USER =  os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD =  os.environ.get('EMAIL_HOST_PASSWORD')
 
 
 CORS_ORIGIN_WHITELIST = [

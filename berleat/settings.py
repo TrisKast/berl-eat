@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
 DEBUG = False
-ALLOWED_HOSTS = ['berl-eat.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['berl-eat.herokuapp.com', '127.0.0.1', 'berleat.com']
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
@@ -162,5 +162,7 @@ EMAIL_HOST_PASSWORD =  os.environ.get('EMAIL_HOST_PASSWORD')
 CORS_ORIGIN_WHITELIST = [
                             'http://berl-eat.herokuapp.com',
                             'http://127.0.0.1',
-                            'https://localhost:8000'
+                            'https://localhost:8000',
+                            'https://berleat.com',
+                            'https://www.berleat.com'
                         ]

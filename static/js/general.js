@@ -66,7 +66,7 @@ var app = new Vue({
         },
         compute_district_list: function () {
             const self = this;
-            let = api_url = 'https://berl-eat.herokuapp.com/api/restaurant_list/';
+            let api_url = 'https://berl-eat.herokuapp.com/api/restaurant_list/';
             // const url = 'http://127.0.0.1:8000/api/restaurant_list/'
             fetch(api_url)
                 .then((resp) => resp.json())

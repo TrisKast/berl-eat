@@ -43,6 +43,8 @@ var app = new Vue({
         this.compute_district_list();
         this.compute_cuisine_list();
         this.compute_special_list();
+
+        this.style.overflow = "hidden";
     },
     methods: {
         // Compute the values that need to be shown in the specific dropdown

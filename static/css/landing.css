@@ -44,6 +44,10 @@ html{
 	margin:auto;
 }
 
+#suggestion{
+	flex:1;
+}
+
 #landingSection{
 	background-image: url('../images/berlinbackground.jpg');
 	background-repeat: no-repeat;
@@ -56,7 +60,15 @@ html{
 
 #suggestionSection{
 	 position:relative;
+	 height: 100vh;
 }
+
+#restaurantLinks{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
 
 #suggestionJumbo{
 	font-family:'Montserrat',serif;
@@ -93,6 +105,7 @@ html{
 	height:100%;
 	width:100%;
 }
+
 
 /* For mobile */
 @media only screen and (max-width:991px){

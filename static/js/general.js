@@ -89,8 +89,8 @@ const landingSection = document.querySelector('#landingSection')
 footer.style.display = 'block'
 
 async function compute_cuisine_list() {
-    // let api_url = 'https://berl-eat.herokuapp.com/api/restaurant_list/';
-    const url = 'http://127.0.0.1:8000/api/restaurant_list/'
+    let api_url = 'https://berl-eat.herokuapp.com/api/restaurant_list/';
+    // const url = 'http://127.0.0.1:8000/api/restaurant_list/'
     const cuisine_list = Array.from(await fetch(url)
         .then((resp) => resp.json())
         .then(function (data) {
@@ -116,8 +116,8 @@ async function compute_cuisine_list() {
 }
 
 async function compute_district_list() {
-    // let api_url = 'https://berl-eat.herokuapp.com/api/restaurant_list/';
-    const url = 'http://127.0.0.1:8000/api/restaurant_list/'
+    let api_url = 'https://berl-eat.herokuapp.com/api/restaurant_list/';
+    // const url = 'http://127.0.0.1:8000/api/restaurant_list/'
     const district_list = Array.from(await fetch(url)
         .then((resp) => resp.json())
         .then(function (data) {
@@ -147,8 +147,8 @@ async function compute_district_list() {
 }
 
 async function compute_special_list() {
-    // let api_url = 'https://berl-eat.herokuapp.com/api/restaurant_list/';
-    const url = 'http://127.0.0.1:8000/api/restaurant_list/'
+    let api_url = 'https://berl-eat.herokuapp.com/api/restaurant_list/';
+    // const url = 'http://127.0.0.1:8000/api/restaurant_list/'
     const special_list = Array.from(await fetch(url)
         .then((resp) => resp.json())
         .then(function (data) {
@@ -180,8 +180,8 @@ async function searchRestaurant() {
     contactSection.style.display = 'none'
     // Inside the fetch call 'this' will be overwritten
 
-    // let api_url = 'https://berl-eat.herokuapp.com/api/restaurant_list/';
-    const url = 'http://127.0.0.1:8000/api/restaurant_list/'
+    let api_url = 'https://berl-eat.herokuapp.com/api/restaurant_list/';
+    //const url = 'http://127.0.0.1:8000/api/restaurant_list/'
     const result = await fetch(url)
         .then((resp) => resp.json())
         .then(function (data) {
@@ -294,6 +294,6 @@ async function searchRestaurant() {
 
 }
 
-//compute_cuisine_list()
-//compute_district_list()
-//compute_special_list()
+compute_cuisine_list()
+compute_district_list()
+compute_special_list()

@@ -95,16 +95,15 @@ WSGI_APPLICATION = 'berleat.wsgi.application'
 
 #This variables are actually not configured in heroku, but it runs anyway ?
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': os.environ.get('DJANGO_DB_BERL_EAT_NAME'),
-       'USER': os.environ.get('DJANGO_DB_BERL_EAT_USER'),
-       'PASSWORD': os.environ.get('DJANGO_DB_BERL_EAT_PASSWORD'),
-       'HOST': os.environ.get('DJANGO_DB_BERL_EAT_HOST'),
-       'PORT': '5432',
-   }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DJANGO_DB_BERL_EAT_NAME'),
+        'USER': os.environ.get('DJANGO_DB_BERL_EAT_USER'),
+        'PASSWORD': os.environ.get('DJANGO_DB_BERL_EAT_PASSWORD'),
+        'HOST': os.environ.get('DJANGO_DB_BERL_EAT_HOST'),
+        'PORT': '5432',
+    }
 }
-
 
 
 

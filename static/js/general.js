@@ -79,7 +79,7 @@ searchRestaurantButton.addEventListener('click', searchRestaurant)
 
 
 async function compute_cuisine_list() {
-    const api_url = 'https://berl-eat.herokuapp.com/api/restaurant_list/';
+    const url = 'https://berl-eat.herokuapp.com/api/restaurant_list/';
     // const url = 'http://127.0.0.1:8000/api/restaurant_list/'
     const cuisine_list = Array.from(await fetch(url)
         .then((resp) => resp.json())
@@ -106,7 +106,7 @@ async function compute_cuisine_list() {
 }
 
 async function compute_district_list() {
-    const api_url = 'https://berl-eat.herokuapp.com/api/restaurant_list/';
+    const url = 'https://berl-eat.herokuapp.com/api/restaurant_list/';
     // const url = 'http://127.0.0.1:8000/api/restaurant_list/'
     const district_list = Array.from(await fetch(url)
         .then((resp) => resp.json())
@@ -137,7 +137,7 @@ async function compute_district_list() {
 }
 
 async function compute_special_list() {
-    const api_url = 'https://berl-eat.herokuapp.com/api/restaurant_list/';
+    const url = 'https://berl-eat.herokuapp.com/api/restaurant_list/';
     // const url = 'http://127.0.0.1:8000/api/restaurant_list/'
     const special_list = Array.from(await fetch(url)
         .then((resp) => resp.json())
@@ -176,7 +176,7 @@ async function searchRestaurant() {
 
 
 
-    const api_url = 'https://berl-eat.herokuapp.com/api/restaurant_list/';
+    const url = 'https://berl-eat.herokuapp.com/api/restaurant_list/';
     // const url = 'http://127.0.0.1:8000/api/restaurant_list/'
 
 

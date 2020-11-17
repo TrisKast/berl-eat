@@ -3,24 +3,7 @@ html{
 	scroll-snap-type: y mandatory;
 }
 
-.contact-form form input {
-	width: 100%;
-	height: 51px;
-	border: 1px solid #e1e1e1;
-	padding-left: 2em;
-	font-size: 16px;
-	margin-bottom: 3em;
-}
-.contact-form form textarea {
-	width: 100%;
-	height: 150px;
-	border: 1px solid #e1e1e1;
-	padding-left: 2em;
-	font-size: 16px;
-	padding-top: 1em;
-	margin-bottom: 2em;
-	resize: none;
-}
+
 .infoLink-button{
 	margin-top: 1em;
 	margin-bottom: 1em;
@@ -31,18 +14,7 @@ html{
 	padding-bottom: 3%;
 }
 
-#send-contact-form-button{
-	font-size: 14px;
-	color: #ffffff;
-	padding: 1em 3em;
-	display: inline-block;
-	background: -webkit-gradient(linear, left top, right top, from(#eb3c5a), to(#f67831));
-	background: -o-linear-gradient(left, #eb3c5a, #f67831);
-	background: linear-gradient(to right, #eb3c5a, #f67831);
-	border: none;
-	text-transform: uppercase;
-	margin:auto;
-}
+
 
 #suggestion{
 	flex:1;
@@ -117,10 +89,7 @@ html{
 		margin-left: 3em;
 		margin-right: 3em;
 	}
-	.contact-form form{
-		padding-left: 3em;
-		padding-right: 3em;
-	}
+
 	#dropMailJumbo{
 		margin-left: 1em;
 		margin-right: 1em;

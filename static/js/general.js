@@ -171,7 +171,7 @@ async function searchRestaurant() {
     suggestionReview.style.display = 'none'
     contactSection.style.display = 'none'
     mapSection.style.display = 'none'
-    contactSection.style.display = 'block'
+    contactSection.style.display = 'flex'
 
 
 
@@ -239,7 +239,7 @@ async function searchRestaurant() {
 
 
 
-            for (var prop of ['mvLink', 'homepageLink', 'facebookLink', 'instagramLink', 'tripadvisorLink']){
+            for (var prop of ['mVLink', 'homepageLink', 'facebookLink', 'instagramLink', 'tripadvisorLink']){
                 if(data[prop]){
                     document.querySelector(`#${prop}Div`).style.display = 'block'
                     document.querySelector('#'+prop+'Div a').href = data[prop]
@@ -268,7 +268,7 @@ async function searchRestaurant() {
         }
 
         // Display the contact form in any case
-        contactSection.style.display = 'block'
+        contactSection.style.display = 'flex'
 
         // Scroll to the name of the suggestion
         suggestionSection.scrollIntoView({block: "start", behavior: "smooth"});

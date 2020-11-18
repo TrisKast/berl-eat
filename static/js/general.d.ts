@@ -1,4 +1,5 @@
 export let api_url : string
+export let url : string
 export const actual_district_list: string[]
 export const actual_kiez_list: string[]
 export const actual_kiez_list_filtered: string[]
